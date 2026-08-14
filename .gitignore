@@ -11,3 +11,10 @@ __pycache__/
 # Ignore local setup artifacts
 .DS_Store
 tmp/
+
+# Ignore notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore local virtual environments
+.venv/
+venv/

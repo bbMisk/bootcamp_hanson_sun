@@ -1,6 +1,6 @@
 # SPY 5-Day Volatility Risk Monitor
 
-**Stage:** Problem Framing & Scoping (Stage 01)
+**Stage:** Tooling Setup (Stage 02)
 
 ## Problem Statement
 
@@ -53,10 +53,22 @@ The intended predictive output is a numeric five-day realized-volatility forecas
 
 Changes will be committed by lifecycle stage so each project contribution can be reviewed independently.
 
+## Environment Setup
+
+```bash
+conda create -n fe-course python=3.11 -y
+conda activate fe-course
+python -m pip install -r requirements.txt
+cp .env.example .env
+jupyter notebook
+```
+
+For the Stage 02 configuration check, set `API_KEY=dummy_key_123` in the local `.env` as instructed by the handout. Never commit `.env` or place a real secret in the repository. Run `notebooks/00_project_setup.ipynb` from top to bottom; the expected safe check is `API_KEY present: True`.
+
 ## Current Status
 
-Stage 01 defines the project scope. Data ingestion, feature engineering, forecasting, and model evaluation have not yet been completed.
+Stage 02 establishes the reproducible environment, configuration pattern, folder structure, and executable setup notebook. The SPY data pipeline and volatility forecast remain future lifecycle work.
 
 ## AI Assistance
 
-AI assistance was used to compare the course requirements, scaffold the repository design, and review the wording for clarity. Hanson Sun reviewed the project objective, stakeholder, assumptions, and final text for accuracy and individual understanding.
+AI assistance was used to compare the course requirements, draft the project documentation, and create and verify the tooling setup. Hanson Sun reviewed the project objective, stakeholder, assumptions, and final text for accuracy and individual understanding.
