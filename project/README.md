@@ -1,6 +1,6 @@
 # SPY 5-Day Volatility Risk Monitor
 
-**Stage:** Tooling Setup (Stage 02)
+**Stage:** Data Storage (Stage 05)
 
 ## Problem Statement
 
@@ -67,7 +67,29 @@ For the Stage 02 configuration check, set `API_KEY=dummy_key_123` in the local `
 
 ## Current Status
 
-Stage 02 establishes the reproducible environment, configuration pattern, folder structure, and executable setup notebook. The SPY data pipeline and volatility forecast remain future lifecycle work.
+Stages 01–05 are implemented. The repository now includes framing, a reproducible Python 3.11 environment, reusable Python/pandas utilities, validated SPY acquisition, and reconciled CSV/Parquet storage. Stage 06 preprocessing and the volatility target remain the next lifecycle work.
+
+## Data Acquisition
+
+`notebooks/project_pipeline.ipynb` uses `yfinance` to request SPY daily data from 2015-01-01 through the latest available trading day. `auto_adjust=True` produces adjusted OHLC prices, and the pipeline keeps the stable contract `date`, `open`, `high`, `low`, `close`, `volume`.
+
+Before storage, reusable validation requires at least 20 rows, exact columns, ordered unique dates, nonmissing positive OHLC prices, and nonnegative volume. The notebook reports the source, request parameters, row count, date range, missing values, duplicates, and a bounded preview.
+
+## Data Storage
+
+- `data/raw/` holds the immutable acquisition snapshot in CSV and Parquet.
+- `data/processed/` is reserved for Stage 06 cleaning and feature-ready outputs.
+- `DATA_DIR` in `.env` controls the data root; relative values resolve inside `project/`.
+- CSV is portable and human-readable. Parquet preserves types efficiently for analysis.
+- `src/storage.py` reloads both formats and reconciles every row and column against the validated source frame.
+
+Run the full pipeline from `project/`:
+
+```bash
+python -m jupyter nbconvert --execute --to notebook --inplace --ExecutePreprocessor.kernel_name=fe-course notebooks/project_pipeline.ipynb
+```
+
+Yahoo Finance is suitable for this course workflow but is not a contractual institutional feed. Availability, schemas, adjustments, and historical values can change, so the acquisition and reconciliation checks must be rerun before relying on a refreshed snapshot.
 
 ## Canonical Course Materials
 
