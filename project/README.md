@@ -69,6 +69,10 @@ For the Stage 02 configuration check, set `API_KEY=dummy_key_123` in the local `
 
 Stage 02 establishes the reproducible environment, configuration pattern, folder structure, and executable setup notebook. The SPY data pipeline and volatility forecast remain future lifecycle work.
 
+## Canonical Course Materials
+
+The requirements for this repository were reconciled on 2026-08-17 against the signed-in NYU Google Drive folder `Documents(BootCamp)(FRE5040)(Fall 2026)`. Local reference copies of the Stage 01–05 homework sheets, starter notebooks, project-milestone instructions, and repository-structure guide are stored under the ignored `class_materials/` directory and are not committed.
+
 ## AI Assistance
 
 AI assistance was used to compare the course requirements, draft the project documentation, and create and verify the tooling setup. Hanson Sun reviewed the project objective, stakeholder, assumptions, and final text for accuracy and individual understanding.
