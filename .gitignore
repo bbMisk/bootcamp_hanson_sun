@@ -7,6 +7,7 @@ __pycache__/
 
 # Ignore environment files
 .env
+project/.env
 
 # Ignore local setup artifacts
 .DS_Store
@@ -18,3 +19,6 @@ tmp/
 # Ignore local virtual environments
 .venv/
 venv/
+
+# Ignore isolated worktrees if created later
+.worktrees/
