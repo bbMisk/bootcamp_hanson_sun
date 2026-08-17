@@ -1,6 +1,6 @@
 # FRE 5040 Course Catch-Up Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Align the repository with the current FRE 5040 Drive, complete homework and project Stages 01–05, and produce a verified SPY ingestion/storage pipeline ready for preprocessing.
 
@@ -40,7 +40,7 @@
 - Consumes: the existing Stage 01–02 repository.
 - Produces: a single project root at `project/`, plus ignored `class_materials/` and preserved `homework/`.
 
-- [ ] **Step 1: Record the pre-migration inventory**
+- [x] **Step 1: Record the pre-migration inventory**
 
 Run:
 
@@ -51,11 +51,11 @@ git ls-files | sort
 
 Expected: clean worktree; `.env` is absent from tracked files.
 
-- [ ] **Step 2: Move the existing project artifacts without copying them**
+- [x] **Step 2: Move the existing project artifacts without copying them**
 
 Use patch-based file moves so history remains legible. Remove `project/.gitkeep` once real project files exist.
 
-- [ ] **Step 3: Update `.gitignore`**
+- [x] **Step 3: Update `.gitignore`**
 
 Ensure these rules exist:
 
@@ -72,11 +72,11 @@ venv/
 tmp/
 ```
 
-- [ ] **Step 4: Update relocated paths**
+- [x] **Step 4: Update relocated paths**
 
 Set `project/src/config.py` to resolve `project/.env`, and update notebook/README references so commands run from `project/`.
 
-- [ ] **Step 5: Verify the migration**
+- [x] **Step 5: Verify the migration**
 
 Run:
 
@@ -92,7 +92,7 @@ git diff --check
 
 Expected: all commands exit 0.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
@@ -112,15 +112,15 @@ git commit -m "refactor: align repository with course layout"
 - Consumes: the signed-in canonical Google Drive.
 - Produces: local, ignored reference copies used to create the homework artifacts and verify project requirements.
 
-- [ ] **Step 1: Download the current homework folder contents**
+- [x] **Step 1: Download the current homework folder contents**
 
 Download the Stage 01–05 homework sheets and starter notebooks from Drive into `class_materials/homework/`. Retain the Drive filenames exactly.
 
-- [ ] **Step 2: Download the current project milestone PDFs and structure PDF**
+- [x] **Step 2: Download the current project milestone PDFs and structure PDF**
 
 Store the five milestone PDFs under `class_materials/project_milestones/` and the repository-structure PDF at the class-materials root.
 
-- [ ] **Step 3: Verify intake completeness**
+- [x] **Step 3: Verify intake completeness**
 
 Run:
 
@@ -132,7 +132,7 @@ git check-ignore -v class_materials/homework/*
 
 Expected: homework sheets/starters for Stages 01–05, five project PDFs, and every file ignored.
 
-- [ ] **Step 4: Record a non-secret manifest in the project README**
+- [x] **Step 4: Record a non-secret manifest in the project README**
 
 Document the canonical Drive folder name and retrieval date without committing the downloaded course files.
 
@@ -148,7 +148,7 @@ Document the canonical Drive folder name and retrieval date without committing t
 **Interfaces:**
 - Produces: `clean_column_name(name: str) -> str`, `clean_columns(frame: pandas.DataFrame) -> pandas.DataFrame`, and `parse_date_column(frame: pandas.DataFrame, column: str) -> pandas.DataFrame`.
 
-- [ ] **Step 1: Write failing utility tests**
+- [x] **Step 1: Write failing utility tests**
 
 ```python
 import pandas as pd
@@ -179,7 +179,7 @@ def test_parse_date_column_rejects_invalid_values():
         parse_date_column(pd.DataFrame({"date": ["not-a-date"]}), "date")
 ```
 
-- [ ] **Step 2: Run tests and confirm the intended failure**
+- [x] **Step 2: Run tests and confirm the intended failure**
 
 Run:
 
@@ -189,7 +189,7 @@ Run:
 
 Expected: collection fails because `src.utils` does not exist.
 
-- [ ] **Step 3: Implement the minimal utilities**
+- [x] **Step 3: Implement the minimal utilities**
 
 ```python
 import re
@@ -217,7 +217,7 @@ def parse_date_column(frame: pd.DataFrame, column: str) -> pd.DataFrame:
     return result.sort_values(column).reset_index(drop=True)
 ```
 
-- [ ] **Step 4: Run the targeted and full suites**
+- [x] **Step 4: Run the targeted and full suites**
 
 ```bash
 (cd project && python -m pytest tests/test_utils.py -v)
@@ -226,7 +226,7 @@ def parse_date_column(frame: pd.DataFrame, column: str) -> pd.DataFrame:
 
 Expected: all tests pass.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add project/src project/tests
@@ -244,7 +244,7 @@ git commit -m "feat: add Stage 03 data utilities"
 - Consumes: `clean_columns` and `parse_date_column` from Task 3.
 - Produces: an executed tutorial notebook demonstrating Python, NumPy, pandas, and reusable project utilities.
 
-- [ ] **Step 1: Scaffold the notebook with `nbformat`**
+- [x] **Step 1: Scaffold the notebook with `nbformat`**
 
 Create cells in this order:
 
@@ -256,13 +256,13 @@ Create cells in this order:
 6. `## Checks` with assertions on normalized columns, sorted dates, and row count.
 7. `## Next Steps` explaining acquisition/preprocessing reuse.
 
-- [ ] **Step 2: Validate notebook structure**
+- [x] **Step 2: Validate notebook structure**
 
 ```bash
 python -m json.tool project/notebooks/python_fundamentals_summary.ipynb >/dev/null
 ```
 
-- [ ] **Step 3: Execute from a clean kernel**
+- [x] **Step 3: Execute from a clean kernel**
 
 ```bash
 (cd project && python -m jupyter nbconvert --execute --to notebook --inplace notebooks/python_fundamentals_summary.ipynb)
@@ -270,7 +270,7 @@ python -m json.tool project/notebooks/python_fundamentals_summary.ipynb >/dev/nu
 
 Expected: exit 0 with visible bounded outputs and no traceback.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add project/notebooks/python_fundamentals_summary.ipynb
@@ -290,7 +290,7 @@ git commit -m "feat: complete Stage 03 project notebook"
 - Produces: `normalize_yfinance_frame(frame: pandas.DataFrame) -> pandas.DataFrame`, `validate_market_data(frame: pandas.DataFrame, min_rows: int = 20) -> None`, and `download_daily_prices(symbol: str, start: str, end: str | None = None) -> pandas.DataFrame`.
 - Data contract columns: `date`, `open`, `high`, `low`, `close`, `volume`.
 
-- [ ] **Step 1: Write failing normalization and validation tests**
+- [x] **Step 1: Write failing normalization and validation tests**
 
 ```python
 import pandas as pd
@@ -342,7 +342,7 @@ def test_validate_market_data_rejects_nonpositive_prices():
         validate_market_data(frame)
 ```
 
-- [ ] **Step 2: Run tests and confirm the intended failure**
+- [x] **Step 2: Run tests and confirm the intended failure**
 
 ```bash
 (cd project && python -m pytest tests/test_ingestion.py -v)
@@ -350,7 +350,7 @@ def test_validate_market_data_rejects_nonpositive_prices():
 
 Expected: collection fails because `src.ingestion` does not exist.
 
-- [ ] **Step 3: Implement normalization and validation**
+- [x] **Step 3: Implement normalization and validation**
 
 Implementation requirements:
 
@@ -361,13 +361,13 @@ PRICE_COLUMNS = ["open", "high", "low", "close"]
 
 `normalize_yfinance_frame` must flatten a possible ticker-level `MultiIndex`, reset the date index, normalize names, select the required columns, parse dates, and reset row indices. `validate_market_data` must enforce the schema, minimum row count, unique ordered dates, non-null numeric price values, positive prices, and nonnegative volume.
 
-- [ ] **Step 4: Run tests and confirm green**
+- [x] **Step 4: Run tests and confirm green**
 
 ```bash
 (cd project && python -m pytest tests/test_ingestion.py -v)
 ```
 
-- [ ] **Step 5: Add the network boundary**
+- [x] **Step 5: Add the network boundary**
 
 Implement:
 
@@ -389,13 +389,13 @@ def download_daily_prices(symbol: str, start: str, end: str | None = None) -> pd
 
 Add `yfinance` to `project/requirements.txt`.
 
-- [ ] **Step 6: Run the full suite**
+- [x] **Step 6: Run the full suite**
 
 ```bash
 (cd project && python -m pytest -v)
 ```
 
-- [ ] **Step 7: Run a bounded live preflight**
+- [x] **Step 7: Run a bounded live preflight**
 
 ```bash
 (cd project && python -c "from src.ingestion import download_daily_prices; x=download_daily_prices('SPY','2026-01-01'); print(len(x), x.date.min().date(), x.date.max().date(), x.columns.tolist())")
@@ -403,7 +403,7 @@ Add `yfinance` to `project/requirements.txt`.
 
 Expected: at least 20 real rows, a plausible 2026 date range, and the stable six-column schema.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add project/src/ingestion.py project/tests/test_ingestion.py project/requirements.txt
@@ -422,7 +422,7 @@ git commit -m "feat: add validated SPY ingestion"
 **Interfaces:**
 - Produces: `resolve_data_dir(project_root: pathlib.Path) -> pathlib.Path`, `save_raw_snapshot(frame: pandas.DataFrame, symbol: str, data_dir: pathlib.Path) -> tuple[pathlib.Path, pathlib.Path]`, and `verify_storage_round_trip(source: pandas.DataFrame, csv_path: pathlib.Path, parquet_path: pathlib.Path) -> None`.
 
-- [ ] **Step 1: Write failing storage tests**
+- [x] **Step 1: Write failing storage tests**
 
 ```python
 from pathlib import Path
@@ -463,7 +463,7 @@ def test_save_and_verify_round_trip(tmp_path: Path):
     verify_storage_round_trip(sample_frame(), csv_path, parquet_path)
 ```
 
-- [ ] **Step 2: Run tests and confirm the intended failure**
+- [x] **Step 2: Run tests and confirm the intended failure**
 
 ```bash
 (cd project && python -m pytest tests/test_storage.py -v)
@@ -471,15 +471,15 @@ def test_save_and_verify_round_trip(tmp_path: Path):
 
 Expected: collection fails because `src.storage` does not exist.
 
-- [ ] **Step 3: Implement minimal path resolution and storage**
+- [x] **Step 3: Implement minimal path resolution and storage**
 
 `resolve_data_dir` resolves relative `DATA_DIR` values under `project_root`. `save_raw_snapshot` creates the target directory and writes `symbol.lower() + '_daily.csv'` and `.parquet` without the DataFrame index.
 
-- [ ] **Step 4: Implement strict reconciliation**
+- [x] **Step 4: Implement strict reconciliation**
 
 `verify_storage_round_trip` reloads CSV with parsed dates and Parquet, normalizes column order, and uses `pandas.testing.assert_frame_equal(..., check_dtype=False, rtol=1e-10, atol=1e-12)` against the source for both formats. Missing files must raise `FileNotFoundError`.
 
-- [ ] **Step 5: Add Parquet support and run tests**
+- [x] **Step 5: Add Parquet support and run tests**
 
 Add `pyarrow` to `project/requirements.txt`, then run:
 
@@ -490,7 +490,7 @@ Add `pyarrow` to `project/requirements.txt`, then run:
 
 Expected: all tests pass.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add project/src/storage.py project/tests/test_storage.py project/requirements.txt
@@ -510,7 +510,7 @@ git commit -m "feat: add reproducible raw-data storage"
 - Consumes: `download_daily_prices`, `resolve_data_dir`, `save_raw_snapshot`, and `verify_storage_round_trip`.
 - Produces: executed `project/notebooks/project_pipeline.ipynb`, `project/data/raw/spy_daily.csv`, and `project/data/raw/spy_daily.parquet`.
 
-- [ ] **Step 1: Add visible pipeline parameters and setup**
+- [x] **Step 1: Add visible pipeline parameters and setup**
 
 Start the notebook with the canonical path-safe cell from the Stage 04 milestone. Define:
 
@@ -520,15 +520,15 @@ START_DATE = "2015-01-01"
 END_DATE = None
 ```
 
-- [ ] **Step 2: Add focused acquisition and validation cells**
+- [x] **Step 2: Add focused acquisition and validation cells**
 
 Download with `download_daily_prices`, then display only row count, date range, columns, missing-value counts, duplicate-date count, and a five-row preview.
 
-- [ ] **Step 3: Add storage and reconciliation cells**
+- [x] **Step 3: Add storage and reconciliation cells**
 
 Resolve the project data directory, save into `data/raw/`, run `verify_storage_round_trip`, and print the two paths and their byte sizes.
 
-- [ ] **Step 4: Update project documentation**
+- [x] **Step 4: Update project documentation**
 
 Add to `project/README.md`:
 
@@ -541,7 +541,7 @@ Add to `project/README.md`:
 
 Set `DATA_DIR=./data` in `project/.env.example`.
 
-- [ ] **Step 5: Execute the notebook top-to-bottom**
+- [x] **Step 5: Execute the notebook top-to-bottom**
 
 ```bash
 (cd project && python -m jupyter nbconvert --execute --to notebook --inplace notebooks/project_pipeline.ipynb)
@@ -549,13 +549,13 @@ Set `DATA_DIR=./data` in `project/.env.example`.
 
 Expected: exit 0; real SPY rows downloaded; CSV/Parquet outputs created; reconciliation confirmation visible.
 
-- [ ] **Step 6: Run independent post-run QC**
+- [x] **Step 6: Run independent post-run QC**
 
 ```bash
 (cd project && python -c "import pandas as pd; x=pd.read_csv('data/raw/spy_daily.csv',parse_dates=['date']); assert len(x)>1000; assert x.date.is_monotonic_increasing; assert x.date.is_unique; assert (x[['open','high','low','close']]>0).all().all(); print(len(x), x.date.min().date(), x.date.max().date())")
 ```
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add project/notebooks/project_pipeline.ipynb project/data/raw/spy_daily.csv project/data/raw/spy_daily.parquet project/README.md project/.env.example
@@ -577,31 +577,31 @@ git commit -m "feat: complete Stage 04 and Stage 05 pipeline"
 - Consumes: the exact canonical starter notebooks and homework sheets downloaded in Task 2.
 - Produces: five self-contained, executed homework workspaces that preserve starter intent and satisfy their current sheets.
 
-- [ ] **Step 1: Copy each starter notebook into its matching homework directory**
+- [x] **Step 1: Copy each starter notebook into its matching homework directory**
 
 Use the original filename without `-starter` for the completed working copy. Preserve any non-empty starter prompts and cell order.
 
-- [ ] **Step 2: Complete Stage 01**
+- [x] **Step 2: Complete Stage 01**
 
 Answer every framing prompt using the SPY 5-Day Volatility Risk Monitor: stakeholder, decision, useful answer, assumptions, risks, scope boundary, lifecycle mapping, and AI disclosure. Assertions or a final checklist must confirm no required prompt is blank.
 
-- [ ] **Step 3: Complete Stage 02**
+- [x] **Step 3: Complete Stage 02**
 
 Use a local ignored `.env`, `python-dotenv`, NumPy, and the environment/config checks required by the sheet. Never print a key value. The notebook must visibly show key presence, Python version, package imports, and a deterministic NumPy result.
 
-- [ ] **Step 4: Complete Stage 03**
+- [x] **Step 4: Complete Stage 03**
 
 Demonstrate Python, NumPy, pandas, column cleaning, date parsing, and reusable function behavior with toy data. Include assertions for expected columns, values, and dates.
 
-- [ ] **Step 5: Complete Stage 04**
+- [x] **Step 5: Complete Stage 04**
 
 Perform a bounded `yfinance` API pull plus the permitted public-table exercise required by the canonical sheet. Validate HTTP/data success, schemas, row counts, nulls, and duplicates; save outputs inside `homework/homework04/data/`.
 
-- [ ] **Step 6: Complete Stage 05**
+- [x] **Step 6: Complete Stage 05**
 
 Save and reload CSV and Parquet data, reconcile results, and demonstrate an environment-driven data path. Include assertions for file existence, row/column equality, and representative values.
 
-- [ ] **Step 7: Execute all five notebooks from clean kernels**
+- [x] **Step 7: Execute all five notebooks from clean kernels**
 
 For each notebook:
 
@@ -611,7 +611,7 @@ python -m jupyter nbconvert --execute --to notebook --inplace <path-to-notebook>
 
 Expected: every command exits 0 with no traceback.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add homework/homework01 homework/homework02 homework/homework03 homework/homework04 homework/homework05
@@ -629,7 +629,7 @@ git commit -m "feat: complete homework Stages 01 through 05"
 - Consumes: all previous tasks.
 - Produces: a trust verdict and a repository ready for Stage 06 preprocessing.
 
-- [ ] **Step 1: Verify the repository tree and ignore rules**
+- [x] **Step 1: Verify the repository tree and ignore rules**
 
 ```bash
 find project homework -maxdepth 3 -type f | sort
@@ -639,7 +639,7 @@ git check-ignore -q class_materials/example.txt
 test -z "$(git ls-files | grep -E '(^|/)\.env$|^class_materials/' || true)"
 ```
 
-- [ ] **Step 2: Run the full automated suite**
+- [x] **Step 2: Run the full automated suite**
 
 ```bash
 (cd project && python -m pytest -v)
@@ -647,15 +647,15 @@ test -z "$(git ls-files | grep -E '(^|/)\.env$|^class_materials/' || true)"
 
 Expected: all tests pass without warnings caused by project code.
 
-- [ ] **Step 3: Validate every notebook artifact**
+- [x] **Step 3: Validate every notebook artifact**
 
 Use `nbformat.read(..., as_version=4)` on every tracked `.ipynb`; assert each code cell has a non-null execution count after execution and no output with `output_type == 'error'`.
 
-- [ ] **Step 4: Reconcile raw artifacts independently**
+- [x] **Step 4: Reconcile raw artifacts independently**
 
 Reload CSV and Parquet outside the notebook, compare shape, columns, dates, and values, and report byte sizes and SHA-256 hashes.
 
-- [ ] **Step 5: Inspect Git state and final diff**
+- [x] **Step 5: Inspect Git state and final diff**
 
 ```bash
 git status --short
@@ -663,6 +663,6 @@ git log --oneline --decorate -10
 git diff --check HEAD~1..HEAD
 ```
 
-- [ ] **Step 6: State the verdict**
+- [x] **Step 6: State the verdict**
 
 Report `Verdict: Trusted` only if the tests, notebooks, real-data checks, storage reconciliation, ignore rules, and Git inspection all pass. Otherwise report `Verdict: Not trusted` or `Verdict: Unknown` with the exact missing evidence.
