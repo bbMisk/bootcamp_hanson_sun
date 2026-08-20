@@ -110,4 +110,4 @@ The requirements for this repository were reconciled on 2026-08-20 against the s
 
 ## AI Assistance
 
-AI assistance was used to compare the course requirements, draft the project documentation, and create and verify the tooling setup. Hanson Sun reviewed the project objective, stakeholder, assumptions, and final text for accuracy and individual understanding.
+Hanson Sun authored the project objective, stakeholder framing, assumptions, and final text. AI assistance was used to compare the course requirements and help create and verify the tooling setup.

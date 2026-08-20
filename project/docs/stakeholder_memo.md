@@ -34,4 +34,4 @@ Establish the reproducible Python environment, configuration pattern, and projec
 
 ## AI Assistance Disclosure
 
-AI assistance was used to check the assignment requirements and improve document structure. Hanson Sun reviewed the decision framing, scope, assumptions, and final wording for individual understanding.
+Hanson Sun authored the decision framing, scope, assumptions, and final wording. AI assistance was used to check the assignment requirements and suggest improvements to the document structure.
